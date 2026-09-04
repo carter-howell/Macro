@@ -2,6 +2,8 @@
 
 Macro is a small desktop utility for opening folders with global keyboard shortcuts. Add one or more folder and hotkey pairs, start the hotkeys, and keep the app running from the system tray.
 
+![Macro folder hotkey utility interface](media/Hotkey.png)
+
 ## Features
 
 - Create global hotkeys for frequently used folders.
@@ -42,6 +44,10 @@ python Macro.py
 6. Click **Start All Hotkeys**.
 
 The app stores shortcuts locally in `hotkey_queue.json`, which is ignored by Git so personal folder paths are not committed.
+
+## Portfolio
+
+Portfolio page: [Hotkey Folder Macro](https://wchowellarchive.web.app/Projects/Hotkey/Hotkey.html)
 
 ## Status
 
