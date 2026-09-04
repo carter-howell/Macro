@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import filedialog
 import keyboard
 import json
-from PIL import Image
+from PIL import Image, ImageDraw
 import pystray
 
 QUEUE_FILE = 'hotkey_queue.json'
@@ -97,7 +97,7 @@ class FolderHotkeyApp:
 
     def validate_hotkey(self, hotkey):
         valid_modifiers = {'ctrl', 'alt', 'shift'}
-        keys = hotkey.split('+')
+        keys = [key.strip().lower() for key in hotkey.split('+')]
 
         if len(keys) < 2:
             return False
@@ -142,6 +142,7 @@ class FolderHotkeyApp:
         self.status_label.config(text="Deleted selected hotkey-folder pair.", fg="green")
 
     def set_all_hotkeys(self):
+        keyboard.clear_all_hotkeys()
         for hotkey, folder in self.hotkey_queue:
             keyboard.add_hotkey(hotkey, self.open_folder, args=[folder])
         self.status_label.config(text="All hotkeys are now active.", fg="green")
@@ -169,6 +170,16 @@ class FolderHotkeyApp:
                 return json.load(f)
         return []
 
+    def load_icon(self):
+        try:
+            return Image.open("icon.png")
+        except FileNotFoundError:
+            icon_image = Image.new('RGB', (64, 64), color='white')
+            draw = ImageDraw.Draw(icon_image)
+            draw.rectangle([12, 18, 52, 48], outline='black', fill='#2f81f7')
+            draw.rectangle([12, 14, 32, 24], outline='black', fill='#79c0ff')
+            return icon_image
+
     def create_system_tray(self):
         def on_quit(icon, item):
             self.root.quit()
@@ -176,8 +187,8 @@ class FolderHotkeyApp:
         def show_window(icon, item):
             self.root.deiconify()
             self.root.after(100, self.root.lift)
-            
-        icon_image = Image.open("icon.png")
+
+        icon_image = self.load_icon()
         menu = (pystray.MenuItem('Show', show_window), pystray.MenuItem('Quit', on_quit))
         icon = pystray.Icon("FolderHotkeyApp", icon_image, menu=menu)
         icon.run_detached()
