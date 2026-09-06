@@ -1,6 +1,6 @@
 # Macro
 
-Macro is a small desktop utility for opening folders with global keyboard shortcuts. Add one or more folder and hotkey pairs, start the hotkeys, and keep the app running from the system tray.
+I built Macro as a small desktop utility for opening folders with global keyboard shortcuts. I can add one or more folder and hotkey pairs, start the hotkeys, and keep the app running from the system tray.
 
 ![Macro folder hotkey utility interface](media/Hotkey.png)
 
@@ -51,4 +51,4 @@ Portfolio page: [Hotkey Folder Macro](https://wchowellarchive.web.app/Projects/H
 
 ## Status
 
-This is an early utility project. Good next improvements would be packaging it as a Windows executable, adding import/export for shortcut profiles, improving validation for more key combinations, and adding tests around queue persistence.
+This is an early utility project. My next improvements would be packaging it as a Windows executable, adding import/export for shortcut profiles, improving validation for more key combinations, and adding tests around queue persistence.
